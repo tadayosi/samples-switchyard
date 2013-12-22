@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:resteasy="urn:switchyard-component-resteasy:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="rest-proxy" targetNamespace="urn:samples-switchyard:rest-proxy:1.0">
+  <sca:composite name="rest-proxy" targetNamespace="urn:samples-switchyard:rest-proxy:1.0">
+    <sca:service name="GreetingBeanService" promote="GreetingBeanProxy/GreetingProxy">
+      <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      <resteasy:binding.rest>
+        <resteasy:contextMapper includes="http.*"/>
+        <resteasy:interfaces>com.redhat.samples.switchyard.GreetingResource</resteasy:interfaces>
+        <resteasy:contextPath>proxy-bean</resteasy:contextPath>
+      </resteasy:binding.rest>
+    </sca:service>
+    <sca:service name="GreetingCamelService" promote="GreetingCamelProxy/GreetingProxy">
+      <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      <resteasy:binding.rest>
+        <resteasy:contextMapper includes="http.*"/>
+        <resteasy:interfaces>com.redhat.samples.switchyard.GreetingResource</resteasy:interfaces>
+        <resteasy:contextPath>proxy-camel</resteasy:contextPath>
+      </resteasy:binding.rest>
+    </sca:service>
+    <sca:component name="GreetingBeanProxy">
+      <bean:implementation.bean class="com.redhat.samples.switchyard.GreetingProxyBean"/>
+      <sca:service name="GreetingProxy">
+        <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      </sca:service>
+      <sca:reference name="GreetingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      </sca:reference>
+    </sca:component>
+    <sca:component name="GreetingCamelProxy">
+      <camel:implementation.camel>
+        <camel:java class="com.redhat.samples.switchyard.GreetingProxyRoute"/>
+      </camel:implementation.camel>
+      <sca:service name="GreetingProxy">
+        <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      </sca:service>
+      <sca:reference name="GreetingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      </sca:reference>
+    </sca:component>
+    <sca:reference name="GreetingService" multiplicity="0..1" promote="GreetingCamelProxy/GreetingService GreetingBeanProxy/GreetingService">
+      <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      <resteasy:binding.rest>
+        <resteasy:contextMapper/>
+        <resteasy:interfaces>com.redhat.samples.switchyard.GreetingResource</resteasy:interfaces>
+        <resteasy:address>http://localhost:18080/</resteasy:address>
+      </resteasy:binding.rest>
+    </sca:reference>
+  </sca:composite>
+  <domain>
+    <properties>
+      <property name="org.switchyard.handlers.messageTrace.enabled" value="false"/>
+    </properties>
+  </domain>
+</switchyard>

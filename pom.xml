@@ -12,6 +12,7 @@
 
     <modules>
         <module>bean</module>
+        <module>rest-proxy</module>
     </modules>
 
     <properties>
@@ -70,6 +71,17 @@
                     <version>1.2.1</version>
                     <configuration>
                         <classpathScope>test</classpathScope>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>9.1.0.v20131115</version>
+                    <configuration>
+                        <httpConnector>
+                            <port>18080</port>
+                        </httpConnector>
+                        <reload>manual</reload>
                     </configuration>
                 </plugin>
                 <plugin>
