@@ -12,12 +12,14 @@
 
     <modules>
         <module>bean</module>
+        <module>http-proxy</module>
         <module>rest-proxy</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.switchyard>1.1.0.Final</version.switchyard>
+        <version.camel>2.10.0</version.camel>
     </properties>
 
     <build>
@@ -95,6 +97,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.functionaljava</groupId>
+            <artifactId>functionaljava</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
@@ -135,6 +142,11 @@
                 <version>${version.switchyard}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-http</artifactId>
+                <version>${version.camel}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
