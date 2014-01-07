@@ -12,7 +12,7 @@ public class GreetingProxyRoute extends RouteBuilder {
     public void configure() {
 
         //@formatter:off
-        from("switchyard://GreetingProxy")
+        from("switchyard://GreetingCamelProxy")
             .routeId(getClass().getName())
             .log("********************************************************************************")
             .log("body = ${body}")

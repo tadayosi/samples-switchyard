@@ -1,6 +1,7 @@
 package com.redhat.samples.switchyard;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -15,13 +16,10 @@ public class GreetingClient {
         HTTPMixIn httpMixIn = new HTTPMixIn();
         httpMixIn.initialize();
         try {
-            getAndPrintStatus(httpMixIn, PROXY_URL_BEAN, "/hello/Sample");
-            getAndPrintStatus(httpMixIn, PROXY_URL_BEAN, "/hello/error");
-            getAndPrintStatus(httpMixIn, PROXY_URL_BEAN, "/hello/not_found");
-
-            getAndPrintStatus(httpMixIn, PROXY_URL_CAMEL, "/goodbye/Sample");
-            getAndPrintStatus(httpMixIn, PROXY_URL_CAMEL, "/goodbye/error");
-            getAndPrintStatus(httpMixIn, PROXY_URL_CAMEL, "/goodbye/unauthorized");
+            for (String name : Arrays.asList("Sample", "error", "not_found", "unauthorized")) {
+                getAndPrintStatus(httpMixIn, PROXY_URL_BEAN, "/hello/" + name);
+                getAndPrintStatus(httpMixIn, PROXY_URL_CAMEL, "/goodbye/" + name);
+            }
         } finally {
             httpMixIn.uninitialize();
         }

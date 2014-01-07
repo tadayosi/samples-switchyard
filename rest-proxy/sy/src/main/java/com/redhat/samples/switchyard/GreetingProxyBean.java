@@ -14,7 +14,7 @@ import org.switchyard.component.bean.ReferenceInvoker;
 import org.switchyard.component.bean.Service;
 import org.switchyard.component.resteasy.composer.RESTEasyContextMapper;
 
-@Service(value = GreetingService.class, name = "GreetingProxy")
+@Service(value = GreetingService.class, name = "GreetingBeanProxy")
 public class GreetingProxyBean implements GreetingService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GreetingProxyBean.class);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:resteasy="urn:switchyard-component-resteasy:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="rest-proxy" targetNamespace="urn:samples-switchyard:rest-proxy:1.0">
   <sca:composite name="rest-proxy" targetNamespace="urn:samples-switchyard:rest-proxy:1.0">
-    <sca:service name="GreetingBeanService" promote="GreetingBeanProxy/GreetingProxy">
+    <sca:service name="GreetingBeanService" promote="GreetingBeanProxy/GreetingBeanProxy">
       <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
       <resteasy:binding.rest>
         <resteasy:contextMapper includes="http.*"/>
@@ -9,7 +9,7 @@
         <resteasy:contextPath>proxy-bean</resteasy:contextPath>
       </resteasy:binding.rest>
     </sca:service>
-    <sca:service name="GreetingCamelService" promote="GreetingCamelProxy/GreetingProxy">
+    <sca:service name="GreetingCamelService" promote="GreetingCamelProxy/GreetingCamelProxy">
       <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
       <resteasy:binding.rest>
         <resteasy:contextMapper includes="http.*"/>
@@ -19,7 +19,7 @@
     </sca:service>
     <sca:component name="GreetingBeanProxy">
       <bean:implementation.bean class="com.redhat.samples.switchyard.GreetingProxyBean"/>
-      <sca:service name="GreetingProxy">
+      <sca:service name="GreetingBeanProxy">
         <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
       </sca:service>
       <sca:reference name="GreetingService">
@@ -30,7 +30,7 @@
       <camel:implementation.camel>
         <camel:java class="com.redhat.samples.switchyard.GreetingProxyRoute"/>
       </camel:implementation.camel>
-      <sca:service name="GreetingProxy">
+      <sca:service name="GreetingCamelProxy">
         <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
       </sca:service>
       <sca:reference name="GreetingService">
@@ -41,7 +41,7 @@
       <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
       <resteasy:binding.rest>
         <resteasy:contextMapper/>
-        <resteasy:interfaces>com.redhat.samples.switchyard.GreetingResource</resteasy:interfaces>
+        <resteasy:interfaces>com.redhat.samples.switchyard.GreetingClientResource</resteasy:interfaces>
         <resteasy:address>http://localhost:18080/</resteasy:address>
       </resteasy:binding.rest>
     </sca:reference>
