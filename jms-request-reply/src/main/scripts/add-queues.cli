@@ -1,0 +1,7 @@
+batch
+jms-queue add --queue-address=samples.switchyard.hello.request    --entries=queue/samples.switchyard.hello.request,java:jboss/exported/jms/queue/samples.switchyard.hello.request
+jms-queue add --queue-address=samples.switchyard.hello.reply      --entries=queue/samples.switchyard.hello.reply,java:jboss/exported/jms/queue/samples.switchyard.hello.reply
+jms-queue add --queue-address=samples.switchyard.goodbye.request  --entries=queue/samples.switchyard.goodbye.request,java:jboss/exported/jms/queue/samples.switchyard.goodbye.request
+jms-queue add --queue-address=samples.switchyard.goodbye.reply    --entries=queue/samples.switchyard.goodbye.reply,java:jboss/exported/jms/queue/samples.switchyard.goodbye.reply
+run-batch
+:reload

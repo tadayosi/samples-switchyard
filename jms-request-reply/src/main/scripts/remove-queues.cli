@@ -1,0 +1,7 @@
+batch
+jms-queue remove --queue-address=samples.switchyard.hello.request
+jms-queue remove --queue-address=samples.switchyard.hello.reply
+jms-queue remove --queue-address=samples.switchyard.goodbye.request
+jms-queue remove --queue-address=samples.switchyard.goodbye.reply
+run-batch
+:reload

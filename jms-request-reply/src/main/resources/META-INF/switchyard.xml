@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:jms="urn:switchyard-component-camel-jms:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="jms-request-reply" targetNamespace="urn:samples-switchyard:jms-request-reply:1.0">
+  <sca:composite name="jms-request-reply" targetNamespace="urn:samples-switchyard:jms-request-reply:1.0">
+    <sca:service name="GreetingService" promote="GreetingService/GreetingService">
+      <jms:binding.jms name="hello">
+        <operationSelector operationName="hello"/>
+        <jms:queue>samples.switchyard.hello.request</jms:queue>
+        <jms:connectionFactory>#ConnectionFactory</jms:connectionFactory>
+        <jms:replyTo>samples.switchyard.hello.reply</jms:replyTo>
+      </jms:binding.jms>
+      <jms:binding.jms name="goodbye">
+        <operationSelector operationName="goodbye"/>
+        <jms:queue>samples.switchyard.goodbye.request</jms:queue>
+        <jms:connectionFactory>#ConnectionFactory</jms:connectionFactory>
+        <jms:replyTo>samples.switchyard.goodbye.reply</jms:replyTo>
+      </jms:binding.jms>
+    </sca:service>
+    <sca:component name="GreetingService">
+      <bean:implementation.bean class="com.redhat.samples.switchyard.GreetingServiceImpl"/>
+      <sca:service name="GreetingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+</switchyard>
