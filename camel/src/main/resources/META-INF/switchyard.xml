@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:http="urn:switchyard-component-http:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="camel" targetNamespace="urn:samples-switchyard:camel:1.0">
+  <sca:composite name="camel" targetNamespace="urn:samples-switchyard:camel:1.0">
+    <sca:service name="GreetingService" promote="GreetingRoute/GreetingService">
+      <interface.esb inputType="java.lang.String" outputType="java.lang.String"/>
+      <http:binding.http name="greeting">
+        <http:contextPath>sample/greeting</http:contextPath>
+      </http:binding.http>
+    </sca:service>
+    <sca:component name="GreetingRoute">
+      <camel:implementation.camel>
+        <camel:java class="com.redhat.samples.switchyard.GreetingRoute"/>
+      </camel:implementation.camel>
+      <sca:service name="GreetingService">
+        <interface.esb inputType="java.lang.String" outputType="java.lang.String"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+</switchyard>

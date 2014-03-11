@@ -12,6 +12,7 @@
 
     <modules>
         <module>bean</module>
+        <module>camel</module>
         <module>http-proxy</module>
         <module>jms-request-reply</module>
         <module>rest-proxy</module>
