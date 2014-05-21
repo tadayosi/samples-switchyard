@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0" xmlns:transform="urn:switchyard-config:transform:1.0" name="versioning-service-1.1" targetNamespace="urn:samples-switchyard:versioning-service:1.1">
+  <sca:composite name="versioning-service-1.1" targetNamespace="urn:samples-switchyard:versioning-service:1.1">
+    <sca:service name="GreetingService" promote="GreetingService/GreetingService">
+      <sca:interface.wsdl interface="GreetingServiceV1_1.wsdl#wsdl.porttype(GreetingServicePortType)"/>
+      <soap:binding.soap>
+        <soap:wsdl>GreetingServiceV1_1.wsdl</soap:wsdl>
+        <soap:wsdlPort>GreetingServicePort</soap:wsdlPort>
+        <soap:socketAddr>:18080</soap:socketAddr>
+        <soap:contextPath>sample/service/v1.1</soap:contextPath>
+      </soap:binding.soap>
+    </sca:service>
+    <sca:component name="GreetingService">
+      <bean:implementation.bean class="com.redhat.samples.switchyard.versioning.service.v1_1.GreetingServiceImpl"/>
+      <sca:service name="GreetingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.versioning.service.v1_1.GreetingServicePortType"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+  <transforms>
+    <transform:transform.jaxb from="java:com.redhat.samples.switchyard.versioning.service.v1_1.GoodbyeResponse" to="{urn:samples-switchyard:versioning:greeting-service:1.1}goodbyeResponse" contextPath="com.redhat.samples.switchyard.versioning.service.v1_1"/>
+    <transform:transform.jaxb from="java:com.redhat.samples.switchyard.versioning.service.v1_1.HelloResponse" to="{urn:samples-switchyard:versioning:greeting-service:1.1}helloResponse" contextPath="com.redhat.samples.switchyard.versioning.service.v1_1"/>
+    <transform:transform.jaxb from="{urn:samples-switchyard:versioning:greeting-service:1.1}goodbye" to="java:com.redhat.samples.switchyard.versioning.service.v1_1.Goodbye" contextPath="com.redhat.samples.switchyard.versioning.service.v1_1"/>
+    <transform:transform.jaxb from="{urn:samples-switchyard:versioning:greeting-service:1.1}hello" to="java:com.redhat.samples.switchyard.versioning.service.v1_1.Hello" contextPath="com.redhat.samples.switchyard.versioning.service.v1_1"/>
+  </transforms>
+</switchyard>

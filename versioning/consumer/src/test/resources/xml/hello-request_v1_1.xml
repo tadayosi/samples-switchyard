@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sample:hello xmlns:sample="urn:samples-switchyard:versioning:greeting-service:1.1">
+    <sample:name>Test</sample:name>
+</sample:hello>

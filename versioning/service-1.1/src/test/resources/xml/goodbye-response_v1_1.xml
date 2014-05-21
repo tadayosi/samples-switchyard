@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sample="urn:samples-switchyard:versioning:greeting-service:1.1">
+    <SOAP-ENV:Header />
+    <SOAP-ENV:Body>
+        <sample:goodbyeResponse>
+            <sample:message>Goodbye, Test!</sample:message>
+        </sample:goodbyeResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

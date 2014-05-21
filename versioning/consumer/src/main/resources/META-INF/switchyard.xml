@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sy:switchyard xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:quartz="urn:switchyard-component-camel-quartz:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0" xmlns:sy="urn:switchyard-config:switchyard:1.0" name="versioning-consumer" targetNamespace="urn:samples-switchyard:versioning-consumer:1.0">
+  <sca:composite name="versioning-consumer" targetNamespace="urn:samples-switchyard:versioning-consumer:1.0">
+    <sca:service name="GreetingConsumer" promote="GreetingConsumerRoute/GreetingConsumerRoute">
+      <sy:interface.esb inputType="java.lang.String" outputType="java.lang.String"/>
+      <sca:binding.sca sy:clustered="false"/>
+    </sca:service>
+    <sca:component name="GreetingConsumerRoute">
+      <camel:implementation.camel>
+        <camel:java class="com.redhat.samples.switchyard.versioning.consumer.GreetingConsumerRoute"/>
+      </camel:implementation.camel>
+      <sca:service name="GreetingConsumerRoute">
+        <sy:interface.esb inputType="java.lang.String" outputType="java.lang.String"/>
+      </sca:service>
+      <sca:reference name="GreetingServiceV10">
+        <sca:interface.wsdl interface="GreetingServiceV1_0.wsdl#wsdl.porttype(GreetingServicePortType)"/>
+      </sca:reference>
+      <sca:reference name="GreetingServiceV11">
+        <sca:interface.wsdl interface="GreetingServiceV1_1.wsdl#wsdl.porttype(GreetingServicePortType)"/>
+      </sca:reference>
+    </sca:component>
+    <sca:reference name="GreetingServiceV10" multiplicity="0..1" promote="GreetingConsumerRoute/GreetingServiceV10">
+      <sca:interface.wsdl interface="GreetingServiceV1_0.wsdl#wsdl.porttype(GreetingServicePortType)"/>
+      <soap:binding.soap>
+        <soap:wsdl>GreetingServiceV1_0.wsdl</soap:wsdl>
+        <soap:endpointAddress>http://localhost:8080/sample/service/v1.0/GreetingService</soap:endpointAddress>
+      </soap:binding.soap>
+    </sca:reference>
+    <sca:reference name="GreetingServiceV11" multiplicity="0..1" promote="GreetingConsumerRoute/GreetingServiceV11">
+      <sca:interface.wsdl interface="GreetingServiceV1_1.wsdl#wsdl.porttype(GreetingServicePortType)"/>
+      <soap:binding.soap>
+        <soap:wsdl>GreetingServiceV1_1.wsdl</soap:wsdl>
+        <soap:endpointAddress>http://localhost:8080/sample/service/v1.1/GreetingService</soap:endpointAddress>
+      </soap:binding.soap>
+    </sca:reference>
+  </sca:composite>
+  <sy:domain>
+    <sy:properties>
+      <sy:property name="org.switchyard.handlers.messageTrace.enabled" value="true"/>
+    </sy:properties>
+  </sy:domain>
+</sy:switchyard>

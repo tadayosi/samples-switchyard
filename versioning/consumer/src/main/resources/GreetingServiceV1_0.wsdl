@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GreetingService" targetNamespace="urn:samples-switchyard:versioning:greeting-service:1.0"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:samples-switchyard:versioning:greeting-service:1.0"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:samples-switchyard:versioning:greeting-service:1.0"
+            attributeFormDefault="unqualified" elementFormDefault="qualified"
+            targetNamespace="urn:samples-switchyard:versioning:greeting-service:1.0">
+            <xsd:element name="hello" type="tns:hello" />
+            <xsd:complexType name="hello">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="name" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="helloResponse" type="tns:helloResponse" />
+            <xsd:complexType name="helloResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="message" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="hello">
+        <wsdl:part name="parameters" element="tns:hello" />
+    </wsdl:message>
+    <wsdl:message name="helloResponse">
+        <wsdl:part name="parameters" element="tns:helloResponse" />
+    </wsdl:message>
+    <wsdl:portType name="GreetingServicePortType">
+        <wsdl:operation name="hello">
+            <wsdl:input name="hello" message="tns:hello" />
+            <wsdl:output name="helloResponse" message="tns:helloResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GreetingServiceSoapBinding" type="tns:GreetingServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="hello">
+            <soap:operation soapAction="hello" style="document" />
+            <wsdl:input name="hello">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="helloResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="GreetingService">
+        <wsdl:port name="GreetingServicePort" binding="tns:GreetingServiceSoapBinding">
+            <soap:address location="http://localhost:8080/sample/GreetingService" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

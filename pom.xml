@@ -16,6 +16,7 @@
         <module>http-proxy</module>
         <module>jms-request-reply</module>
         <module>rest-proxy</module>
+        <module>versioning</module>
     </modules>
 
     <properties>
@@ -25,7 +26,6 @@
     </properties>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <!-- build -->
             <plugin>
