@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sample="urn:samples-switchyard:dynamic-soap-endpoint:1.0">
+  <soapenv:Header />
+  <soapenv:Body>
+    <sample:hello>
+      <sample:name>Test</sample:name>
+    </sample:hello>
+  </soapenv:Body>
+</soapenv:Envelope>
