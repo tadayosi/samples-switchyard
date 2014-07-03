@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:ftp="urn:switchyard-component-camel-ftp:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="ftp-filename" targetNamespace="urn:samples-switchyard:ftp-filename:1.0">
+  <sca:composite name="ftp-filename" targetNamespace="urn:samples-switchyard:ftp-filename:1.0">
+    <sca:service name="FileService" promote="FileRoute/FileService">
+      <interface.esb inputType="java:java.lang.String"/>
+      <sca:binding.sca/>
+    </sca:service>
+    <sca:component name="FileRoute">
+      <camel:implementation.camel>
+        <camel:java class="com.redhat.samples.switchyard.FileRoute"/>
+      </camel:implementation.camel>
+      <sca:service name="FileService">
+        <interface.esb inputType="java:java.lang.String"/>
+      </sca:service>
+      <sca:reference name="FTPOut">
+        <interface.esb inputType="java:java.lang.String"/>
+      </sca:reference>
+    </sca:component>
+    <sca:reference name="FTPOut" multiplicity="0..1" promote="FileRoute/FTPOut">
+      <interface.esb inputType="java:java.lang.String"/>
+      <ftp:binding.ftp>
+        <ftp:contextMapper includes="camelfilename"/>
+        <ftp:directory>out</ftp:directory>
+        <ftp:host>localhost</ftp:host>
+        <ftp:port>2121</ftp:port>
+        <ftp:username>sample</ftp:username>
+        <ftp:password>password</ftp:password>
+        <ftp:produce/>
+      </ftp:binding.ftp>
+    </sca:reference>
+  </sca:composite>
+  <domain>
+    <properties>
+      <property name="org.switchyard.handlers.messageTrace.enabled" value="true"/>
+    </properties>
+  </domain>
+</switchyard>

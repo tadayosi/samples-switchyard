@@ -14,6 +14,7 @@
         <module>bean</module>
         <module>camel</module>
         <module>dynamic-soap-endpoint</module>
+        <module>ftp-filename</module>
         <module>http-proxy</module>
         <module>jms-request-reply</module>
         <module>rest-proxy</module>
