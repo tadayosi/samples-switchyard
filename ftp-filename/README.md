@@ -1,3 +1,5 @@
-# Camel Service Sample
+# Dynamic File Name Sample for FTP Binding
 
-A basic Camel service sample.
+This sample project demonstrates how to change file name at runtime per message for FTP binding. This should work for other similar bindings like File, FTPS, etc. as well.
+
+For more information, see also: https://community.jboss.org/thread/237384
