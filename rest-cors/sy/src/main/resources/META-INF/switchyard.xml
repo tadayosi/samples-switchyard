@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sy:switchyard xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:resteasy="urn:switchyard-component-resteasy:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sy="urn:switchyard-config:switchyard:1.0" name="rest-cors" targetNamespace="urn:samples-switchyard:rest-cors:1.0">
+  <sca:composite name="rest-cors" targetNamespace="urn:samples-switchyard:rest-cors:1.0">
+    <sca:service name="GreetingService" promote="GreetingServiceBean/GreetingService">
+      <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      <resteasy:binding.rest>
+        <resteasy:contextMapper class="com.redhat.samples.switchyard.CorsRESTEasyContextMapper"/>
+        <resteasy:interfaces>com.redhat.samples.switchyard.GreetingResource</resteasy:interfaces>
+        <resteasy:contextPath>sample</resteasy:contextPath>
+      </resteasy:binding.rest>
+    </sca:service>
+    <sca:component name="GreetingServiceBean">
+      <bean:implementation.bean class="com.redhat.samples.switchyard.GreetingServiceBean"/>
+      <sca:service name="GreetingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.GreetingService"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+  <sy:domain>
+    <sy:properties>
+      <sy:property name="org.switchyard.handlers.messageTrace.enabled" value="true"/>
+    </sy:properties>
+  </sy:domain>
+</sy:switchyard>
