@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.redhat.samples.switchyard</groupId>
     <artifactId>samples-switchyard-versioning</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
   </parent>
   <groupId>com.redhat.samples.switchyard.versioning</groupId>
   <artifactId>samples-switchyard-versioning-consumer</artifactId>
