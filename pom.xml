@@ -12,6 +12,7 @@
 
     <modules>
         <module>bean</module>
+        <module>bean-war</module>
         <module>camel</module>
         <module>dynamic-soap-endpoint</module>
         <module>ftp-filename</module>

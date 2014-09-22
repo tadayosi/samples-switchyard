@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sample="urn:samples-switchyard:bean:1.0">
+    <SOAP-ENV:Header />
+    <SOAP-ENV:Body>
+        <sample:helloResponse>
+            <sample:string>Hello, Test!</sample:string>
+        </sample:helloResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
