@@ -3,6 +3,7 @@ package com.redhat.samples.switchyard;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
+import org.switchyard.component.soap.util.SOAPUtil;
 import org.switchyard.component.test.mixins.http.HTTPMixIn;
 
 public class GreetingClient {
@@ -15,7 +16,7 @@ public class GreetingClient {
         try {
             String response = httpMixIn.postString(ENDPOINT_URL,
                     IOUtils.toString(GreetingClient.class.getResource("/xml/hello-request.xml")));
-            System.out.println(response);
+            SOAPUtil.prettyPrint(response, System.out);
         } finally {
             httpMixIn.uninitialize();
         }
