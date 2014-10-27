@@ -18,6 +18,7 @@
         <module>ftp-filename</module>
         <module>http-proxy</module>
         <module>jms-request-reply</module>
+        <module>native-web-gateway</module>
         <module>rest-cors</module>
         <module>rest-proxy</module>
         <module>versioning</module>
