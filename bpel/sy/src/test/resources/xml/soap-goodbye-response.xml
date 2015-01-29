@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns2="http://ws.switchyard.samples.redhat.com/">
+  <SOAP-ENV:Header />
+  <SOAP-ENV:Body>
+    <ns2:goodbyeResponse>
+      <return>Goodbye, Test!</return>
+    </ns2:goodbyeResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

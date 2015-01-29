@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:greetingProcess="urn:samples-switchyard:bpel:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0" name="bpel" targetNamespace="urn:samples-switchyard:bpel:1.0">
+  <sca:composite name="bpel" targetNamespace="urn:samples-switchyard:bpel:1.0">
+    <sca:service name="GreetingService" promote="GreetingProcess/GreetingBPELService">
+      <sca:interface.wsdl interface="greeting.wsdl#wsdl.porttype(GreetingService)"/>
+      <soap:binding.soap name="soap">
+        <soap:wsdl>greeting.wsdl</soap:wsdl>
+        <soap:contextPath>sample</soap:contextPath>
+      </soap:binding.soap>
+    </sca:service>
+    <sca:component name="GreetingProcess">
+      <sca:implementation.bpel process="greetingProcess:GreetingProcess"/>
+      <sca:service name="GreetingBPELService">
+        <sca:interface.wsdl interface="greeting.wsdl#wsdl.porttype(GreetingService)"/>
+      </sca:service>
+      <sca:reference name="GreetingWSService">
+        <sca:interface.wsdl interface="greeting.wsdl#wsdl.porttype(GreetingService)"/>
+      </sca:reference>
+    </sca:component>
+    <sca:reference name="GreetingWSService" multiplicity="0..1" promote="GreetingProcess/GreetingWSService">
+      <sca:interface.wsdl interface="greeting.wsdl#wsdl.porttype(GreetingService)"/>
+      <soap:binding.soap name="soap">
+        <soap:wsdl>greeting.wsdl</soap:wsdl>
+        <soap:endpointAddress>http://localhost:18080/greeting</soap:endpointAddress>
+      </soap:binding.soap>
+    </sca:reference>
+  </sca:composite>
+  <domain>
+    <properties>
+      <property name="org.switchyard.handlers.messageTrace.enabled" value="true"/>
+    </properties>
+  </domain>
+</switchyard>

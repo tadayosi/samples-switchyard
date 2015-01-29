@@ -13,6 +13,7 @@
   <modules>
     <module>bean</module>
     <module>bean-war</module>
+    <module>bpel</module>
     <module>camel</module>
     <module>dynamic-soap-endpoint</module>
     <module>ftp-filename</module>
@@ -29,7 +30,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <version.switchyard>1.1.0.Final</version.switchyard>
     <version.camel>2.10.0</version.camel>
-    <version.cxf>2.6.8</version.cxf>
+    <version.cxf>2.6.6</version.cxf>
   </properties>
 
   <build>
@@ -166,21 +167,6 @@
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-http</artifactId>
         <version>${version.camel}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-frontend-jaxws</artifactId>
-        <version>${version.cxf}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-transports-http</artifactId>
-        <version>${version.cxf}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-transports-http-jetty</artifactId>
-        <version>${version.cxf}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:sample="http://ws.switchyard.samples.redhat.com/">
+  <soapenv:Header />
+  <soapenv:Body>
+    <sample:goodbye>
+      <name>Test</name>
+    </sample:goodbye>
+  </soapenv:Body>
+</soapenv:Envelope>

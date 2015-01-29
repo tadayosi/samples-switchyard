@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process name="GreetingProcess" targetNamespace="urn:samples-switchyard:bpel:1.0"
+  exitOnStandardFault="yes" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+  xmlns:tns="urn:samples-switchyard:bpel:1.0" xmlns:ws="http://ws.switchyard.samples.redhat.com/">
+
+  <!--
+    <bpel:import importType="http://schemas.xmlsoap.org/wsdl/" location="greeting.wsdl"
+    namespace="http://ws.switchyard.samples.redhat.com/" />
+  -->
+  <bpel:import importType="http://schemas.xmlsoap.org/wsdl/" location="GreetingProcessPartners.wsdl"
+    namespace="urn:samples-switchyard:bpel:1.0" />
+
+  <bpel:partnerLinks>
+    <bpel:partnerLink name="GreetingService_client" partnerLinkType="tns:GreetingProcessPLT"
+      myRole="GreetingProcessProvider" />
+    <bpel:partnerLink name="GreetingService_ws" partnerLinkType="tns:GreetingProcessPLT"
+      partnerRole="GreetingProcessProvider" />
+  </bpel:partnerLinks>
+
+  <bpel:variables>
+    <bpel:variable name="helloRequest" messageType="ws:hello" />
+    <bpel:variable name="helloResponse" messageType="ws:helloResponse" />
+    <bpel:variable name="goodbyeRequest" messageType="ws:goodbye" />
+    <bpel:variable name="goodbyeResponse" messageType="ws:goodbyeResponse" />
+  </bpel:variables>
+
+  <bpel:sequence name="main">
+    <bpel:pick name="ReceiveRequest" createInstance="yes">
+      <bpel:onMessage partnerLink="GreetingService_client" portType="ws:GreetingService"
+        operation="hello" variable="helloRequest">
+        <bpel:sequence>
+          <bpel:invoke name="InvokeWS_Hello" partnerLink="GreetingService_ws" operation="hello"
+            portType="ws:GreetingService" inputVariable="helloRequest" outputVariable="helloResponse" />
+          <bpel:reply name="ReplyToHello" partnerLink="GreetingService_client" portType="ws:GreetingService"
+            operation="hello" variable="helloResponse" />
+        </bpel:sequence>
+      </bpel:onMessage>
+      <bpel:onMessage partnerLink="GreetingService_client" portType="ws:GreetingService"
+        operation="goodbye" variable="goodbyeRequest">
+        <bpel:sequence>
+          <bpel:invoke name="InvokeWS_Goodbye" partnerLink="GreetingService_ws"
+            operation="goodbye" portType="ws:GreetingService" inputVariable="goodbyeRequest"
+            outputVariable="goodbyeResponse" />
+          <bpel:reply name="ReplyToGoodbye" partnerLink="GreetingService_client"
+            portType="ws:GreetingService" operation="goodbye" variable="goodbyeResponse" />
+        </bpel:sequence>
+      </bpel:onMessage>
+    </bpel:pick>
+  </bpel:sequence>
+
+</bpel:process>
