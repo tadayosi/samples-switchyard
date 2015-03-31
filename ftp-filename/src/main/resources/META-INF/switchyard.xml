@@ -19,7 +19,7 @@
     <sca:reference name="FTPOut" multiplicity="0..1" promote="FileRoute/FTPOut">
       <interface.esb inputType="java:java.lang.String"/>
       <ftp:binding.ftp>
-        <ftp:contextMapper includes="camelfilename"/>
+        <ftp:contextMapper includes="CamelFileName"/>
         <ftp:directory>out</ftp:directory>
         <ftp:host>localhost</ftp:host>
         <ftp:port>2121</ftp:port>
