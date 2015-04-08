@@ -11,6 +11,7 @@
   <url>https://github.com/tadayosi/samples-switchyard</url>
 
   <modules>
+    <module>audit</module>
     <module>bean</module>
     <module>bean-war</module>
     <module>bpel</module>
