@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.switchyard.bus.camel.audit.Audit;
 import org.switchyard.bus.camel.audit.Auditor;
 import org.switchyard.bus.camel.processors.Processors;
+import org.switchyard.metadata.ExchangeContract;
 import org.switchyard.security.context.SecurityContext;
 
 @Audit(PROVIDER_CALLBACK)
@@ -54,6 +55,11 @@ public class SampleAuditor implements Auditor {
                 for (MessageHistory h : history) {
                     LOGGER.info("      " + h);
                 }
+            } else if ("org.switchyard.bus.camel.contract".equals(key)) {
+                LOGGER.info("    {} =", key);
+                ExchangeContract contract = exchange.getProperty(key, ExchangeContract.class);
+                LOGGER.info("      consumer op = " + contract.getConsumerOperation());
+                LOGGER.info("      provider op = " + contract.getProviderOperation());
             } else if (SecurityContext.class.getName().equals(key)) {
                 LOGGER.info("    {} =", key);
                 SecurityContext sc = (SecurityContext) exchange.getProperty(key);
