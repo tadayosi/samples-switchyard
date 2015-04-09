@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:quartz="urn:switchyard-component-camel-quartz:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0" name="two-way-ssl" targetNamespace="urn:samples-switchyard:two-way-ssl:1.0">
+  <sca:composite name="two-way-ssl" targetNamespace="urn:samples-switchyard:two-way-ssl:1.0">
+    <sca:service name="PingService" promote="PingRoute/PingService">
+      <quartz:binding.quartz name="TenSecondsTrigger">
+        <quartz:name>TenSecondsTrigger</quartz:name>
+        <quartz:cron>*/10 * * * * ?</quartz:cron>
+      </quartz:binding.quartz>
+    </sca:service>
+    <sca:component name="PingRoute">
+      <camel:implementation.camel>
+        <camel:java class="com.redhat.samples.switchyard.PingServiceRoute"/>
+      </camel:implementation.camel>
+      <sca:service name="PingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.PingService"/>
+      </sca:service>
+      <sca:reference name="SoapPingService">
+        <interface.esb inputType="java:java.lang.String" outputType="java:java.lang.String"/>
+      </sca:reference>
+      <sca:reference name="SSLSoapPingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.PingService"/>
+      </sca:reference>
+    </sca:component>
+    <sca:reference name="SoapPingService" multiplicity="0..1" promote="PingRoute/SoapPingService">
+      <sca:interface.wsdl interface="PingService.wsdl#wsdl.porttype(PingService)"/>
+      <soap:binding.soap>
+        <soap:wsdl>PingService.wsdl</soap:wsdl>
+        <soap:wsdlPort>PingServicePort</soap:wsdlPort>
+        <soap:endpointAddress>https://localhost:18443/soap/ping</soap:endpointAddress>
+      </soap:binding.soap>
+    </sca:reference>
+    <sca:component name="SSLSoapPingService">
+      <bean:implementation.bean class="com.redhat.samples.switchyard.SSLSoapPingServiceBean"/>
+      <sca:service name="SSLSoapPingService">
+        <sca:interface.java interface="com.redhat.samples.switchyard.PingService"/>
+      </sca:service>
+    </sca:component>
+  </sca:composite>
+  <domain>
+    <properties>
+      <property name="org.switchyard.handlers.messageTrace.enabled" value="false"/>
+    </properties>
+  </domain>
+</switchyard>
