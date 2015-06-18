@@ -21,6 +21,7 @@
     <module>http-proxy</module>
     <module>http-redirect</module>
     <module>jms-request-reply</module>
+    <module>jpa</module>
     <module>native-web-gateway</module>
     <module>rest-cors</module>
     <module>rest-proxy</module>
