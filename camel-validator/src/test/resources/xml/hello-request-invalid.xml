@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:hello xmlns:ns="urn:samples-switchyard:camel-validator:1.0">
+    <ns:invalid />
+</ns:hello>

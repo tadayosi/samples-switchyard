@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:samples-switchyard:camel-validator:1.0"
+    xmlns:tns="urn:samples-switchyard:camel-validator:1.0" elementFormDefault="qualified" version="1.0">
+    <xsd:element name="hello" type="tns:hello" />
+    <xsd:complexType name="hello">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="name" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="helloResponse" type="tns:helloResponse" />
+    <xsd:complexType name="helloResponse">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="message" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="goodbye" type="tns:goodbye" />
+    <xsd:complexType name="goodbye">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="name" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="goodbyeResponse" type="tns:goodbyeResponse" />
+    <xsd:complexType name="goodbyeResponse">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="message" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

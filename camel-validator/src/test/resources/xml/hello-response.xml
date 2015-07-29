@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:helloResponse xmlns:ns="urn:samples-switchyard:camel-validator:1.0">
+    <ns:message>Hello, Test!</ns:message>
+</ns:helloResponse>

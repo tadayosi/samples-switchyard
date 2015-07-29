@@ -16,6 +16,7 @@
     <module>bean-war</module>
     <module>bpel</module>
     <module>camel</module>
+    <module>camel-validator</module>
     <module>dynamic-soap-endpoint</module>
     <module>ftp-filename</module>
     <module>http-proxy</module>
