@@ -24,6 +24,7 @@
     <module>jms-request-reply</module>
     <module>jpa</module>
     <module>native-web-gateway</module>
+    <module>netty-encoder</module>
     <module>rest-cors</module>
     <module>rest-proxy</module>
     <module>two-way-ssl</module>
