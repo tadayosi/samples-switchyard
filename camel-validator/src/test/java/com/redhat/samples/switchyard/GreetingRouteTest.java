@@ -8,7 +8,9 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.switchyard.component.http.endpoint.StandaloneEndpointPublisher;
 import org.switchyard.component.test.mixins.cdi.CDIMixIn;
+import org.switchyard.test.BeforeDeploy;
 import org.switchyard.test.Invoker;
 import org.switchyard.test.ServiceOperation;
 import org.switchyard.test.SwitchYardRunner;
@@ -26,13 +28,19 @@ public class GreetingRouteTest {
     @ServiceOperation("GreetingRoute")
     private Invoker route;
 
+    /**
+     * Somehow needed for GreetingServiceHttpTest
+     */
+    @BeforeDeploy
+    public void setProperties() {
+        System.setProperty(StandaloneEndpointPublisher.DEFAULT_PORT_PROPERTY, "18080");
+    }
+
     @Before
     public void cleanInvalidDirectory() {
-        if (INVALID_DIR.exists()) {
-            for (File f : INVALID_DIR.listFiles()) {
-                f.delete();
-            }
-        }
+        if (INVALID_DIR.mkdir()) return;
+        for (File f : INVALID_DIR.listFiles())
+            f.delete();
     }
 
     @Test
