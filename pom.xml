@@ -29,6 +29,7 @@
     <module>rest-proxy</module>
     <module>two-way-ssl</module>
     <module>versioning</module>
+    <module>ws-security</module>
   </modules>
 
   <properties>

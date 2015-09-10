@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:cxf="http://cxf.apache.org/core" xmlns:jaxws="http://cxf.apache.org/jaxws"
+  xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+      http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+      http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+  <jaxws:client name="{http://ws.switchyard.samples.redhat.com/}PingServicePort" createdFromAPI="true">
+    <jaxws:properties>
+      <entry key="ws-security.username" value="kermit" />
+      <entry key="ws-security.callback-handler" value="com.redhat.samples.switchyard.ClientPasswordCallback" />
+    </jaxws:properties>
+  </jaxws:client>
+
+</beans>

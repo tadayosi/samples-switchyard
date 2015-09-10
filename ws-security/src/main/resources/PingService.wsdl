@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PingService" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:tns="http://ws.switchyard.samples.redhat.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="http://ws.switchyard.samples.redhat.com/">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.switchyard.samples.redhat.com/"
+      elementFormDefault="unqualified" targetNamespace="http://ws.switchyard.samples.redhat.com/" version="1.0">
+      <xs:element name="ping" type="tns:ping" />
+      <xs:element name="pingResponse" type="tns:pingResponse" />
+      <xs:complexType name="ping">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pingResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ping">
+    <wsdl:part element="tns:ping" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pingResponse">
+    <wsdl:part element="tns:pingResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PingService">
+    <wsdl:operation name="ping">
+      <wsdl:input message="tns:ping" name="ping" />
+      <wsdl:output message="tns:pingResponse" name="pingResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PingServiceSoapBinding" type="tns:PingService">
+    <wsp:PolicyReference URI="#SampleSecurityPolicy" />
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ping">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ping">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pingResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PingService">
+    <wsdl:port binding="tns:PingServiceSoapBinding" name="PingServicePort">
+      <soap:address location="http://localhost:8080/sample-ws/soap/ping" />
+    </wsdl:port>
+  </wsdl:service>
+  <wsp:Policy wsu:Id="SampleSecurityPolicy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SupportingTokens>
+          <wsp:Policy>
+            <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:WssUsernameToken10 />
+              </wsp:Policy>
+            </sp:UsernameToken>
+          </wsp:Policy>
+        </sp:SupportingTokens>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+</wsdl:definitions>
