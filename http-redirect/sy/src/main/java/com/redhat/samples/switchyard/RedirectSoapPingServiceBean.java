@@ -19,7 +19,7 @@ import org.switchyard.component.bean.Service;
 @Service(value = PingService.class, name = "RedirectSoapPingService")
 public class RedirectSoapPingServiceBean implements PingService {
 
-    private static final URL WSDL = RedirectSoapPingServiceBean.class.getResource("/META-INF/PingService.wsdl");
+    private static final URL WSDL = RedirectSoapPingServiceBean.class.getResource("/PingService.wsdl");
     private static final QName SERVICE = new QName("http://ws.switchyard.samples.redhat.com/", "PingService");
     //private static final String ENDPOINT = "http://localhost:8080/sample-ws/soap/ping";
     private static final String ENDPOINT = "http://localhost:8080/sample-ws/redirect";
