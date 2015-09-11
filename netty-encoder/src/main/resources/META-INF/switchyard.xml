@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sy:switchyard xmlns:bean="urn:switchyard-component-bean:config:1.1" xmlns:netty="urn:switchyard-component-camel-netty:config:1.1" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sy="urn:switchyard-config:switchyard:1.1" name="netty-encoder-example" targetNamespace="urn:com.example.switchyard:netty-encoder-example:1.0">
-  <sca:composite name="netty-encoder-example" targetNamespace="urn:com.example.switchyard:netty-encoder-example:1.0">
+<sy:switchyard xmlns:bean="urn:switchyard-component-bean:config:1.1" xmlns:netty="urn:switchyard-component-camel-netty:config:1.1" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sy="urn:switchyard-config:switchyard:1.1" name="netty-encoder" targetNamespace="urn:com.example.switchyard:netty-encoder:1.0">
+  <sca:composite name="netty-encoder" targetNamespace="urn:com.example.switchyard:netty-encoder:1.0">
     <sca:service name="ExampleService" promote="ExampleServiceBean/ExampleService">
       <sca:interface.java interface="com.redhat.samples.switchyard.ExampleService"/>
       <sca:binding.sca name="sca"/>

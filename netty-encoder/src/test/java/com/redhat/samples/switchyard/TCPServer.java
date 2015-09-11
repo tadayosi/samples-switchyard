@@ -1,9 +1,7 @@
-package com.example.switchyard.netty;
+package com.redhat.samples.switchyard;
 
 import java.io.StringWriter;
 import java.net.InetSocketAddress;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.Executors;
 
 import org.jboss.netty.bootstrap.ServerBootstrap;

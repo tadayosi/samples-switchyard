@@ -1,4 +1,4 @@
-package com.example.switchyard.netty;
+package com.redhat.samples.switchyard;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
