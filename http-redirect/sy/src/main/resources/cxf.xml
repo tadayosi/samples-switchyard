@@ -6,8 +6,6 @@
       http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
       http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd">
 
-  <!-- !!! This file is not recognised. !!! -->
-
   <http-conf:conduit name="{http://ws.switchyard.samples.redhat.com/}PingServicePort.http-conduit">
     <http-conf:client AutoRedirect="true" />
   </http-conf:conduit>

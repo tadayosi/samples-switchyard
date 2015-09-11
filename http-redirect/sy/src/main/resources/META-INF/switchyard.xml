@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0"
-  xmlns:quartz="urn:switchyard-component-camel-quartz:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0"
-  name="http-redirect" targetNamespace="urn:samples-switchyard:http-redirect:1.0">
+<switchyard xmlns="urn:switchyard-config:switchyard:1.0" xmlns:bean="urn:switchyard-component-bean:config:1.0" xmlns:camel="urn:switchyard-component-camel:config:1.0" xmlns:quartz="urn:switchyard-component-camel-quartz:config:1.0" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:soap="urn:switchyard-component-soap:config:1.0" name="http-redirect" targetNamespace="urn:samples-switchyard:http-redirect:1.0">
   <sca:composite name="http-redirect" targetNamespace="urn:samples-switchyard:http-redirect:1.0">
     <sca:service name="PingService" promote="PingRoute/PingService">
       <quartz:binding.quartz name="TenSecondsTrigger">
@@ -25,7 +23,7 @@
     </sca:component>
     <sca:reference name="SoapPingService" multiplicity="0..1" promote="PingRoute/SoapPingService">
       <sca:interface.wsdl interface="PingService.wsdl#wsdl.porttype(PingService)"/>
-      <soap:binding.soap>
+      <soap:binding.soap name="soap">
         <soap:wsdl>PingService.wsdl</soap:wsdl>
         <soap:wsdlPort>PingServicePort</soap:wsdlPort>
         <soap:endpointAddress>http://localhost:8080/sample-ws/redirect</soap:endpointAddress>

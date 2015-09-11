@@ -12,8 +12,12 @@ public class PingServiceRoute extends RouteBuilder {
         from("switchyard://PingService").routeId(getClass().getName())
             .setBody().simple(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(new Date()))
             .log("ping = ${body}")
-            //.to("switchyard://SoapPingService")
-            .to("switchyard://RedirectSoapPingService")
+            .choice()
+                .when(header("bean"))
+                    .to("switchyard://RedirectSoapPingService")
+                .otherwise()
+                    .to("switchyard://SoapPingService")
+            .end()
             .log("pong = ${body}");
         //@formatter:on
     }
